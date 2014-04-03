@@ -7,8 +7,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import westion.www.dao.AdminUserDao;
-import westion.www.dao.impl.AdminUserDaoImpl;
 import westion.www.entity.AdminUser;
 import westion.www.exception.LoginException;
 import westion.www.exception.QueryException;
@@ -22,7 +20,7 @@ import westion.www.service.impl.AdminUserServiceImpl;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.AdminUserDao
+ * @see westion.www.dao.AdminUserService
  */
 public class AdminUserAction {
 
@@ -36,6 +34,8 @@ public class AdminUserAction {
 	private List<String> errorList = null;
 
 	private AdminUserService adminUserService = new AdminUserServiceImpl();
+
+	private HttpServletRequest request = null;
 
 	/**
 	 * 构造函数，从request中获取相应的属性，并对私有成员初始化
@@ -51,6 +51,7 @@ public class AdminUserAction {
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (List<String>) request.getAttribute("errorList");
+		this.request = request;
 	}
 
 	/**
@@ -86,5 +87,4 @@ public class AdminUserAction {
 			errorList.add(properties.getProperty("unknownError"));
 		}
 	}
-
 }

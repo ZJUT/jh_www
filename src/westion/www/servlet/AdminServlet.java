@@ -58,7 +58,7 @@ public class AdminServlet extends HttpServlet {
 		String action[] = params.get("action");
 
 		try {
-			Class<?> clz = Class.forName("westion.www.admin.action." + model[0]
+			Class<?> clz = Class.forName("westion.www.admin.action.Admin" + model[0]
 					+ "Action");
 			Method method = clz.getMethod(action[0]);
 			Constructor<?> constructor = clz
@@ -76,4 +76,12 @@ public class AdminServlet extends HttpServlet {
 			errorList.add(config.getProperty("unknownError"));
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	
 }

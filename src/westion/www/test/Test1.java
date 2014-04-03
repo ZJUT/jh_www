@@ -1,6 +1,7 @@
 package westion.www.test;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -20,8 +21,9 @@ public class Test1 {
 	@Test
 	public void test() throws SQLException {
 
-		NoticeService noticeService = new NoticeServiceImpl();
-		System.out.println(noticeService.getNew().getDestination_url());
+	Date a = new Date(9223372036854775807L);
+	
+	System.out.println(Long.toString(a.getTime()));
 		
 	}
 

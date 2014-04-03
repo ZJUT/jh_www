@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.servlet.http.HttpServletRequest;
-
-import westion.www.dao.NavigatorDao;
 import westion.www.dao.impl.NavigatorDaoImpl;
-import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.exception.QueryException;
 import westion.www.service.NavigatorService;
@@ -22,7 +18,7 @@ import westion.www.service.impl.NavigatorServiceImpl;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.NavigatorDao
+ * @see westion.www.dao.NavigatorService
  */
 public class NavigatorAction {
 	/** ÇëÇó²ÎÊý */

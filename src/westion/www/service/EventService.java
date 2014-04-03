@@ -13,6 +13,6 @@ public interface EventService {
 	void update(Integer id, String econtent, String ephoto_url, Integer etime,
 			Integer create_time);
 
-	void add(String econtent, String ephoto_url, Integer etime,
-			Integer create_time);
+
+	void add(String econtent, String ephoto_url, String etime);
 }

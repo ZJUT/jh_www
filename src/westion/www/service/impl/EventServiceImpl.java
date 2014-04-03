@@ -1,6 +1,8 @@
 package westion.www.service.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import westion.www.dao.EventDao;
@@ -15,9 +17,9 @@ import westion.www.utls.JdbcUtls;
 public class EventServiceImpl implements EventService {
 
 	/** Dao层对应操作实例 {@link EventDaoImpl#EventDaoImpl()} */
-	
+
 	private EventDao eventDao = new EventDaoImpl();
-	
+
 	/**
 	 * 获取所有事件信息
 	 * 
@@ -44,12 +46,19 @@ public class EventServiceImpl implements EventService {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, Integer etime,
-			Integer create_time) {
-		eventDao.add(econtent, ephoto_url, etime, create_time);
+	public void add(String econtent, String ephoto_url, String etime) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(etime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(date.getTime());
+		eventDao.add(econtent, ephoto_url, date.getTime(), new Date().getTime());
 	}
 
-	
 	/**
 	 * 删除一条事件
 	 * 
@@ -61,10 +70,9 @@ public class EventServiceImpl implements EventService {
 	 * */
 	@Override
 	public void delete(Integer id) {
-			eventDao.delete(id);
+		eventDao.delete(id);
 	}
-	
-	
+
 	/**
 	 * 修改一条事件
 	 * 

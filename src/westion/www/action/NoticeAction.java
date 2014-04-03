@@ -1,15 +1,10 @@
 package westion.www.action;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-
-import westion.www.dao.NoticeDao;
-import westion.www.dao.impl.NoticeDaoImpl;
 import westion.www.entity.Notice;
 import westion.www.exception.QueryException;
 import westion.www.service.NoticeService;
@@ -22,7 +17,7 @@ import westion.www.service.impl.NoticeServiceImpl;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.NoticeDao
+ * @see westion.www.dao.NoticeService
  */
 public class NoticeAction {
 

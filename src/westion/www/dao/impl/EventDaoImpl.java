@@ -81,16 +81,16 @@ public class EventDaoImpl implements EventDao {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, Integer etime,
-			Integer create_time) {
+	public void add(String econtent, String ephoto_url, long etime,
+			long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
 					.prepareStatement("insert into event(econtent,ephoto_url,etime,create_time)values(?,?,?,?)");
 			st.setString(1, econtent);
 			st.setString(2, ephoto_url);
-			st.setInt(3, etime);
-			st.setInt(4, create_time);
+			st.setLong(3, etime);
+			st.setLong(4, create_time);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new AddException();

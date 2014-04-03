@@ -43,7 +43,7 @@ public final class JdbcUtls {
 	static {
 		InputStream in = null;
 		try {
-			in = JdbcUtls.class.getResourceAsStream("/dbconfig.properties");
+			in = JdbcUtls.class.getResourceAsStream("/../dbconfig.properties");
 			Properties properties = new Properties();
 			properties.load(in);
 			myDataSource = BasicDataSourceFactory.createDataSource(properties);
