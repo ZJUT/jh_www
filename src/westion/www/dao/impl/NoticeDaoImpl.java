@@ -7,7 +7,10 @@ import java.util.List;
 
 import westion.www.dao.NoticeDao;
 import westion.www.entity.Notice;
+import westion.www.exception.AddException;
+import westion.www.exception.DeleteException;
 import westion.www.exception.QueryException;
+import westion.www.exception.UpdateException;
 import westion.www.utls.JdbcUtls;
 
 /**
@@ -49,6 +52,109 @@ public class NoticeDaoImpl implements NoticeDao {
 			throw new QueryException(e);
 		}
 		return (Notice) objects.get(0);
+	}
+
+	/**
+	 * 增加一条通知
+	 * 
+	 * @param ncontent
+	 *            String 通知内容
+	 * @param destination_url
+	 *            String 通知的链接
+	 * @param nphoto_url
+	 *            String 通知图片的链接
+	 * @param create_time
+	 *            String 通知建立的时间
+	 * @throws AddException
+	 *             添加失败
+	 * 
+	 * */
+	@Override
+	public void add(String ncontent, String destination_url, String nphoto_url,
+			Integer create_time) {
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn
+					.prepareStatement("insert into notice(ncontent,destination_url,nphoto_url,create_time)values(?,?,?,?)");
+			st.setString(1, ncontent);
+			st.setString(2, destination_url);
+			st.setString(3, nphoto_url);
+			st.setInt(4, create_time);
+			int acount = st.executeUpdate();
+			if (acount == 0)
+				throw new AddException();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AddException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+
+	}
+
+	/**
+	 * 删除一条通知
+	 * 
+	 * @param Integer
+	 *            id 通知主id
+	 * @throws DeleteException
+	 *             删除失败
+	 * 
+	 * */
+	@Override
+	public void delete(Integer id) {
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn.prepareStatement("delete from notice where nid=?");
+			st.setInt(1, id);
+			int acount = st.executeUpdate();
+			if (acount == 0)
+				throw new DeleteException();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DeleteException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+	}
+
+	/**
+	 * 修改一条通知
+	 * 
+	 * @param ncontent
+	 *            String 通知内容
+	 * @param destination_url
+	 *            String 通知的链接
+	 * @param nphoto_url
+	 *            String 通知图片的链接
+	 * @param create_time
+	 *            String 通知建立的时间
+	 * @throws AddException
+	 *             添加失败
+	 * 
+	 * */
+	@Override
+	public void update(Integer id, String ncontent, String destination_url,
+			String nphoto_url, Integer create_time) {
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn
+					.prepareStatement("update notice set ncontent=?,destination_url=?,nphoto_url=?,create_time=? where nid=?");
+			st.setString(1, ncontent);
+			st.setString(2, destination_url);
+			st.setString(3, nphoto_url);
+			st.setInt(4, create_time);
+			st.setInt(5, id);
+			int acount = st.executeUpdate();
+			if (acount == 0)
+				throw new UpdateException();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UpdateException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+
 	}
 
 }
