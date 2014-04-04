@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import westion.www.exception.ArgumentNumException;
-import westion.www.exception.ArgumentTypeException;
-
 /**
  * 
  * 接受非管理员类的请求类

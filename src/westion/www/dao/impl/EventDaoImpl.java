@@ -5,14 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import westion.www.dao.EventDao;
-import westion.www.dao.NoticeDao;
 import westion.www.entity.Event;
-import westion.www.entity.Notice;
 import westion.www.exception.AddException;
-import westion.www.exception.ArgumentNumException;
 import westion.www.exception.DeleteException;
 import westion.www.exception.QueryException;
 import westion.www.exception.UpdateException;
