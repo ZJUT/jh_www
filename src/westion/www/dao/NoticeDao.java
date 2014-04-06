@@ -15,11 +15,16 @@ public interface NoticeDao {
 
 	Notice getNew();
 
-	void add(String ncontent, String destination_url, String nphoto_url,
-			Integer create_time);
 
 	void delete(Integer id);
 
+	void add(String ncontent, String destination_url, String nphoto_url,
+			Long create_time);
+
+
+	Notice findById(Integer id);
+
+
 	void update(Integer id, String ncontent, String destination_url,
-			String nphoto_url, Integer create_time);
+			String nphoto_url, Long create_time);
 }

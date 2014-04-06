@@ -86,8 +86,11 @@ public class EventServiceImpl implements EventService {
 	 * */
 	@Override
 	public void update(Integer eid, String econtent, String ephoto_url,
-			Long etime) {
-		eventDao.update(eid, econtent, ephoto_url,etime, new Date().getTime());
+			Long etime,Long create_time) {
+		if (create_time == null) {
+			create_time = new Date().getTime();
+		}
+		eventDao.update(eid, econtent, ephoto_url,etime,create_time);
 
 	}
 

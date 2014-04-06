@@ -23,6 +23,6 @@ public interface EventDao {
 
 	Event findById(Integer eid);
 
-	void update(Integer id, String econtent, String ephoto_url, Long etime,
+	void update(Integer eid, String econtent, String ephoto_url, Long etime,
 			Long create_time);
 }

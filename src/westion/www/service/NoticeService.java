@@ -7,9 +7,12 @@ public interface NoticeService {
 
 	void delete(Integer id);
 
-	void update(Integer id, String ncontent, String destination_url,
-			String nphoto_url, Integer create_time);
 
 	void add(String ncontent, String destination_url, String nphoto_url,
-			Integer create_time);
+			Long create_time);
+
+	Notice findById(Integer id);
+
+	void update(Integer id, String ncontent, String destination_url,
+			String nphoto_url, Long create_time);
 }

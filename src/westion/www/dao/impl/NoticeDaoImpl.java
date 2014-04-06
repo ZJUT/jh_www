@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import westion.www.dao.NoticeDao;
+import westion.www.entity.Navigator;
 import westion.www.entity.Notice;
 import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
@@ -71,7 +72,7 @@ public class NoticeDaoImpl implements NoticeDao {
 	 * */
 	@Override
 	public void add(String ncontent, String destination_url, String nphoto_url,
-			Integer create_time) {
+			Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
@@ -79,7 +80,7 @@ public class NoticeDaoImpl implements NoticeDao {
 			st.setString(1, ncontent);
 			st.setString(2, destination_url);
 			st.setString(3, nphoto_url);
-			st.setInt(4, create_time);
+			st.setLong(4, create_time);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new AddException();
@@ -135,7 +136,7 @@ public class NoticeDaoImpl implements NoticeDao {
 	 * */
 	@Override
 	public void update(Integer id, String ncontent, String destination_url,
-			String nphoto_url, Integer create_time) {
+			String nphoto_url, Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
@@ -143,7 +144,7 @@ public class NoticeDaoImpl implements NoticeDao {
 			st.setString(1, ncontent);
 			st.setString(2, destination_url);
 			st.setString(3, nphoto_url);
-			st.setInt(4, create_time);
+			st.setLong(4, create_time);
 			st.setInt(5, id);
 			int acount = st.executeUpdate();
 			if (acount == 0)
@@ -154,6 +155,32 @@ public class NoticeDaoImpl implements NoticeDao {
 		} finally {
 			JdbcUtls.close(conn, st, rs);
 		}
+
+	}
+
+	/**
+	 * 获得一条通知
+	 * */
+	@Override
+	public Notice findById(Integer nid) {
+		Notice notice = null;
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn.prepareStatement("select * from notice where nid=?");
+			st.setInt(1, nid);
+			rs = st.executeQuery();
+			objects = JdbcUtls.GetObjects(rs, Notice.class);
+			if (objects.size() == 0) {
+				throw new QueryException();
+			}
+			notice = (Notice) objects.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new QueryException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+		return notice;
 
 	}
 

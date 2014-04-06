@@ -12,7 +12,9 @@ public interface EventService {
 
 	Event findById(Integer id);
 
-	void update(Integer eid, String econtent, String ephoto_url, Long etime);
 
 	void add(String econtent, String ephoto_url, Long etime,Long create_time);
+
+	void update(Integer eid, String econtent, String ephoto_url, Long etime,
+			Long create_time);
 }

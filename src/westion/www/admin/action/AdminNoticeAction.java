@@ -7,13 +7,12 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import westion.www.entity.Event;
-import westion.www.service.EventService;
-import westion.www.service.impl.EventServiceImpl;
+import westion.www.entity.Notice;
+import westion.www.service.NoticeService;
+import westion.www.service.impl.NoticeServiceImpl;
 import westion.www.utls.FileTool;
-import westion.www.utls.TimeFormat;
 
-public class AdminEventAction {
+public class AdminNoticeAction {
 
 	/** 请求参数 */
 	private Map<String, String[]> params = null;
@@ -24,7 +23,7 @@ public class AdminEventAction {
 	/** 网站全局的返回状态文件 */
 	private List<String> errorList = null;
 
-	private EventService eventService = new EventServiceImpl();
+	private NoticeService noticeService = new NoticeServiceImpl();
 
 	private HttpServletRequest request = null;
 
@@ -35,7 +34,7 @@ public class AdminEventAction {
 	 *            HttpServletRequest
 	 */
 	@SuppressWarnings("unchecked")
-	public AdminEventAction(HttpServletRequest request) {
+	public AdminNoticeAction(HttpServletRequest request) {
 		super();
 		this.params = (Map<String, String[]>) request.getAttribute("params");
 		this.session = request.getSession();
@@ -46,13 +45,13 @@ public class AdminEventAction {
 	}
 
 	/**
-	 * 增加一条事件
+	 * 增加一条通知
 	 * */
-	public void addEvent() {
+	public void addNotice() {
 		String filename = null;
 		try {
 			filename = FileTool.fileUpload(request,
-					"/" + properties.getProperty("eventPhotoDir"));
+					"/" + properties.getProperty("noticePhotoDir"));
 		} catch (Exception e) {
 			errorList.add(properties.getProperty("uploadError"));
 			return;
@@ -60,71 +59,73 @@ public class AdminEventAction {
 		try {
 			String address = null;
 			if (filename != null)
-				address = properties.getProperty("eventPhotoDir") + filename;
-			eventService.add(
-					(String) request.getAttribute("econtent"),
-					address,
-					TimeFormat.changeToLongTime(
-							(String) request.getAttribute("etime")).getTime(),
+				address = properties.getProperty("noticePhotoDir") + filename;
+			noticeService.add((String) request.getAttribute("ncontent"),
+					(String) request.getAttribute("destination_url"), address,
 					null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (filename != null)
 				FileTool.deleteFile(this.request.getServletContext()
 						.getRealPath(
-								"/" + properties.getProperty("eventPhotoDir")
+								"/" + properties.getProperty("noticePhotoDir")
 										+ filename));
 			errorList.add(properties.getProperty("uploadError"));
 		}
 	}
 
 	/**
-	 * 删除一条事件，并要删除图片
+	 * 删除一条通知，并要删除图片
 	 * */
-	public void deleteEvent() {
-		Event event = null;
+	public void deleteNotice() {
+		Notice notice = null;
 		try {
-			event = eventService
-					.findById(Integer.parseInt(params.get("eid")[0]));
-		} catch (Exception e) {
-			errorList.add(properties.getProperty("sqlError"));
-			return;
-		}
-		try {
-			eventService.delete(event.getEid());
-		} catch (Exception e) {
-			errorList.add(properties.getProperty("sqlError"));
-			return;
-		}
-		try {
-			String filename = event.getEphoto_url();
-			if (filename != null)
-				FileTool.deleteFile(this.request.getServletContext()
-						.getRealPath("/" + filename));
-		} catch (Exception e) {
-			eventService.add(event.getEcontent(), event.getEphoto_url(),
-					event.getEtime(), event.getCreate_time());
-			errorList.add(properties.getProperty("sqlError"));
-		}
-
-	}
-
-	/**
-	 * 修改一条事件
-	 * */
-	public void updateEvent() {
-		Event event = null;
-		String filename = null;
-		try {
-			event = eventService
-					.findById(Integer.parseInt(params.get("eid")[0]));
+			notice = noticeService
+					.findById(Integer.parseInt(params.get("nid")[0]));
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorList.add(properties.getProperty("sqlError"));
 			return;
 		}
 		try {
-			filename = event.getEphoto_url();
+			noticeService.delete(notice.getNid());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			String filename = notice.getNphoto_url();
+			if (filename != null)
+				FileTool.deleteFile(this.request.getServletContext()
+						.getRealPath("/" + filename));
+		} catch (Exception e) {
+			e.printStackTrace();
+			noticeService.add(notice.getNcontent(),
+					notice.getDestination_url(), notice.getNphoto_url(),
+					notice.getCreate_time());
+			errorList.add(properties.getProperty("sqlError"));
+		}
+
+	}
+
+	/**
+	 * 修改一条通知
+	 * */
+	public void updateNotice() {
+		Notice notice = null;
+		String filename = null;
+		try {
+			notice = noticeService
+					.findById(Integer.parseInt(params.get("nid")[0]));
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			filename = notice.getNphoto_url();
 			if (filename != null)
 				FileTool.deleteFile(this.request.getServletContext()
 						.getRealPath("/" + filename));
@@ -135,7 +136,7 @@ public class AdminEventAction {
 		}
 		try {
 			filename = FileTool.fileUpload(request,
-					"/" + properties.getProperty("eventPhotoDir"));
+					"/" + properties.getProperty("noticePhotoDir"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorList.add(properties.getProperty("sqlError"));
@@ -144,20 +145,17 @@ public class AdminEventAction {
 		try {
 			String address = null;
 			if (filename != null)
-				address = properties.getProperty("eventPhotoDir") + filename;
-			eventService.update(
-					event.getEid(),
-					(String) request.getAttribute("econtent"),
-					address,
-					TimeFormat.changeToLongTime(
-							(String) request.getAttribute("etime")).getTime(),
+				address = properties.getProperty("noticePhotoDir") + filename;
+			noticeService.update(notice.getNid(),
+					(String) request.getAttribute("ncontent"),
+					(String) request.getAttribute("destination_url"), address,
 					null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (filename != null)
 				FileTool.deleteFile(this.request.getServletContext()
 						.getRealPath(
-								"/" + properties.getProperty("eventPhotoDir")
+								"/" + properties.getProperty("noticePhotoDir")
 										+ filename));
 			errorList.add(properties.getProperty("sqlError"));
 		}

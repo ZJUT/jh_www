@@ -2,6 +2,7 @@ package westion.www.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import westion.www.dao.NoticeDao;
@@ -24,7 +25,10 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public void add(String ncontent, String destination_url, String nphoto_url,
-			Integer create_time) {
+			Long create_time) {
+		if (create_time == null) {
+			create_time = new Date().getTime();
+		}
 		noticeDao.add(ncontent, destination_url, nphoto_url, create_time);
 
 	}
@@ -37,7 +41,10 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public void update(Integer id, String ncontent, String destination_url,
-			String nphoto_url, Integer create_time) {
+			String nphoto_url, Long create_time) {
+		if (create_time == null) {
+			create_time = new Date().getTime();
+		}
 		noticeDao.update(id, ncontent, destination_url, nphoto_url, create_time);
 
 	}
@@ -58,5 +65,11 @@ public class NoticeServiceImpl implements NoticeService {
 			;
 		}
 		return notices;
+	}
+
+	
+	@Override
+	public Notice findById(Integer id) {
+		return noticeDao.findById(id);
 	}
 }
