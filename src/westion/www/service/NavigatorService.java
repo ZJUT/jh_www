@@ -11,4 +11,5 @@ public interface NavigatorService {
 	void delete(Integer id);
 
 	void update(Integer id, String naname, String destination_url);
+	Navigator findById(Integer id);
 }

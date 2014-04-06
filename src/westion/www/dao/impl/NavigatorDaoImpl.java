@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import westion.www.dao.NavigatorDao;
+import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
@@ -146,6 +147,28 @@ public class NavigatorDaoImpl implements NavigatorDao {
 			JdbcUtls.close(conn, st, rs);
 		}
 
+	}
+	
+	@Override
+	public Navigator findById(Integer naid) {
+		Navigator navigator = null;
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn.prepareStatement("select * from navigator where naid=?");
+			st.setInt(1, naid);
+			rs = st.executeQuery();
+			objects = JdbcUtls.GetObjects(rs, Navigator.class);
+			if (objects.size()==0) {
+				throw new QueryException();
+			}
+			navigator = (Navigator)objects.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new QueryException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+		return navigator;
 	}
 
 }

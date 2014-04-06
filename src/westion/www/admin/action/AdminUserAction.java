@@ -35,7 +35,7 @@ public class AdminUserAction {
 
 	private AdminUserService adminUserService = new AdminUserServiceImpl();
 
-	private HttpServletRequest request = null;
+
 
 	/**
 	 * 构造函数，从request中获取相应的属性，并对私有成员初始化
@@ -51,7 +51,6 @@ public class AdminUserAction {
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (List<String>) request.getAttribute("errorList");
-		this.request = request;
 	}
 
 	/**

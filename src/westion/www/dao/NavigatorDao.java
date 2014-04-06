@@ -23,4 +23,6 @@ public interface NavigatorDao {
 
 	void update(Integer id, String naname, String destination_url);
 
+	Navigator findById(Integer eid);
+
 }

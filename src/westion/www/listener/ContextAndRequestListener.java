@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.servlet.ServletContextEvent;
@@ -14,11 +15,9 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
- * Context和request的监听器
- * 主要功能，初始化context域与request域的一些对象
- * Properties errorList params
+ * Context和request的监听器 主要功能，初始化context域与request域的一些对象 Properties errorList
+ * params
  * 
  * @version 1.0, 2014-4-2
  * @author westion
@@ -65,6 +64,12 @@ public class ContextAndRequestListener implements ServletContextListener,
 		request.setAttribute("errorList", errorList);
 		params = request.getParameterMap();
 		request.setAttribute("params", params);
+		
+		for (Entry<String, String[]> para : params.entrySet()) {
+
+			System.out.println(para.getKey() + " = " + para.getValue()[0]);
+
+		}
 	}
 
 	/**
@@ -86,7 +91,8 @@ public class ContextAndRequestListener implements ServletContextListener,
 	 * */
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		InputStream in = sce.getServletContext().getResourceAsStream(sce.getServletContext().getInitParameter("config"));
+		InputStream in = sce.getServletContext().getResourceAsStream(
+				sce.getServletContext().getInitParameter("config"));
 		properties = new Properties();
 
 		try {

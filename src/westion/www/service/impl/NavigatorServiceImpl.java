@@ -4,6 +4,7 @@ import java.util.List;
 
 import westion.www.dao.NavigatorDao;
 import westion.www.dao.impl.NavigatorDaoImpl;
+import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.service.NavigatorService;
 
@@ -31,6 +32,12 @@ public class NavigatorServiceImpl implements NavigatorService {
 	@Override
 	public void update(Integer id, String naname, String destination_url) {
 		navigatorDao.update(id, naname, destination_url);
+	}
+	
+	@Override
+	public Navigator findById(Integer id) {
+		Navigator navigator = navigatorDao.findById(id);
+		return navigator;
 	}
 
 }

@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.servlet.http.HttpServletRequest;
+
 import westion.www.dao.impl.NavigatorDaoImpl;
+import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.exception.QueryException;
 import westion.www.service.NavigatorService;
@@ -63,5 +66,22 @@ public class NavigatorAction {
 			errorList.add(properties.getProperty("unknownError"));
 		}
 		return navigators;
+	}
+	
+	/**
+	 * 获得一条事件
+	 * @return event Event
+	 * */
+	public Navigator getNavigator() {
+		Navigator navigator = null;
+		try {
+			navigator = navigatorService
+					.findById(Integer.parseInt(params.get("naid")[0]));
+		} catch (QueryException e) {
+			errorList.add(properties.getProperty("sqlError"));
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("unknownError"));
+		}
+		return navigator;
 	}
 }

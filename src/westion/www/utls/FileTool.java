@@ -57,7 +57,7 @@ public class FileTool {
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的
 					String value = item.getString("UTF-8");
-
+					System.out.println(value);
 					request.setAttribute(name, value);
 				}
 				// 对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些
