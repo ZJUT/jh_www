@@ -122,12 +122,11 @@ public final class JdbcUtls {
 	 *            ResultSet
 	 * @param clz
 	 *            Class 用于反射对象提供类型
-	 * @return List<Object> 查询结果封装成Object列表
+	 * @return List\<Object\> 查询结果封装成Object列表
 	 * @throws GetObjectException
 	 *             不能从数据库封装到对象
 	 * */
-	public static List<Object> GetObjects(Connection connection, Statement st,
-			ResultSet rs, Class<?> clz) throws Exception {
+	public static List<Object> GetObjects(ResultSet rs, Class<?> clz) throws Exception {
 
 		// 存封装的对象
 		List<Object> objects = new ArrayList<Object>();

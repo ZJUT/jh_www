@@ -1,5 +1,6 @@
 package westion.www.admin.action;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -7,9 +8,11 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import westion.www.entity.Event;
 import westion.www.service.EventService;
 import westion.www.service.impl.EventServiceImpl;
-import westion.www.utls.FileUploadTool;
+import westion.www.utls.FileTool;
+import westion.www.utls.TimeFormat;
 
 public class AdminEventAction {
 
@@ -45,35 +48,118 @@ public class AdminEventAction {
 
 	/**
 	 * 增加一条事件
-	 * 
-	 * @author westion 文件上传 具体步骤： 1）获得磁盘文件条目工厂 DiskFileItemFactory 要导包 2） 利用
-	 *         request 获取 真实路径 ，供临时文件存储，和 最终文件存储 ，这两个存储位置可不同，也可相同 3）对
-	 *         DiskFileItemFactory 对象设置一些 属性 4）高水平的API文件上传处理
-	 *         ServletFileUploadupload = new ServletFileUpload(factory);
-	 *         目的是调用parseRequest（request）方法 获得 FileItem 集合list ， 5）在 FileItem
-	 *         对象中 获取信息， 遍历， 判断 表单提交过来的信息 是否是 普通文本信息 另做处理 6） 第一种. 用第三方 提供的
-	 *         item.write( new File(path,filename) ); 直接写到磁盘上 第二种. 手动处理
-	 * 
-	 * @param econtent
-	 *            String 事件内容
-	 * @param ephoto_url
-	 *            String 事件图片
-	 * @param etime
-	 *            Integer 事件的时间
-	 * @param create_time
-	 *            Integer 事件发布时间
-	 * 
-	 * 
 	 * */
 	public void addEvent() {
+		String filename = null;
 		try {
-			String filename = FileUploadTool.fileUpload(request, "/"
-					+ properties.getProperty("eventPhotoDir"));
-			eventService.add((String) request.getAttribute("econtent"),
-					properties.getProperty("eventPhotoDir") + filename,
-					(String) request.getAttribute("etime"));
+			filename = FileTool.fileUpload(request,
+					"/" + properties.getProperty("eventPhotoDir"));
 		} catch (Exception e) {
 			errorList.add(properties.getProperty("uploadError"));
+			return;
+		}
+		try {
+			String address = null;
+			if (filename != null)
+				address = properties.getProperty("eventPhotoDir") + filename;
+			eventService.add(
+					(String) request.getAttribute("econtent"),
+					address,
+					TimeFormat.changeToLongTime(
+							(String) request.getAttribute("etime")).getTime(),
+					null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (filename != null)
+				FileTool.deleteFile(this.request.getServletContext()
+						.getRealPath(
+								"/" + properties.getProperty("eventPhotoDir")
+										+ filename));
+			errorList.add(properties.getProperty("uploadError"));
+		}
+	}
+
+	/**
+	 * 删除一条事件，并要删除图片
+	 * */
+	public void deleteEvent() {
+		Event event = null;
+		try {
+			event = eventService
+					.findById(Integer.parseInt(params.get("eid")[0]));
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			eventService.delete(event.getEid());
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			String filename = event.getEphoto_url();
+			if (filename != null)
+				FileTool.deleteFile(this.request.getServletContext()
+						.getRealPath("/" + filename));
+		} catch (Exception e) {
+			eventService.add(event.getEcontent(), event.getEphoto_url(),
+					event.getEtime(), event.getCreate_time());
+			errorList.add(properties.getProperty("sqlError"));
+		}
+
+	}
+
+	/**
+	 * 修改一条事件
+	 * */
+	public void updateEvent() {
+		Event event = null;
+		String filename = null;
+		try {
+			event = eventService
+					.findById(Integer.parseInt(params.get("eid")[0]));
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			filename = event.getEphoto_url();
+			if (filename != null)
+				FileTool.deleteFile(this.request.getServletContext()
+						.getRealPath("/" + filename));
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			filename = FileTool.fileUpload(request,
+					"/" + properties.getProperty("eventPhotoDir"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorList.add(properties.getProperty("sqlError"));
+			return;
+		}
+		try {
+			String address = null;
+			if (filename != null)
+				address = properties.getProperty("eventPhotoDir") + filename;
+			eventService.update(
+					event.getEid(),
+					(String) request.getAttribute("econtent"),
+					address,
+					TimeFormat.changeToLongTime(
+							(String) request.getAttribute("etime")).getTime());
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (filename != null)
+				FileTool.deleteFile(this.request.getServletContext()
+						.getRealPath(
+								"/" + properties.getProperty("eventPhotoDir")
+										+ filename));
+			errorList.add(properties.getProperty("sqlError"));
 		}
 
 	}

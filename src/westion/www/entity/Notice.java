@@ -30,7 +30,7 @@ public class Notice {
 	
 	
 	/**距离1970格式的通知创建的时间*/
-	private Integer create_time;
+	private Long create_time;
 	
 	
 	
@@ -65,10 +65,10 @@ public class Notice {
 	public void setDestination_url(String destination_url) {
 		this.destination_url = destination_url;
 	}
-	public Integer getCreate_time() {
+	public Long getCreate_time() {
 		return create_time;
 	}
-	public void setCreate_time(Integer create_time) {
+	public void setCreate_time(Long create_time) {
 		this.create_time = create_time;
 	}
 	public String getNphoto_url() {

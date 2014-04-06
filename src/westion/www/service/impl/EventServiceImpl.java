@@ -12,7 +12,6 @@ import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
 import westion.www.exception.UpdateException;
 import westion.www.service.EventService;
-import westion.www.utls.JdbcUtls;
 
 public class EventServiceImpl implements EventService {
 
@@ -46,17 +45,12 @@ public class EventServiceImpl implements EventService {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, String etime) {
+	public void add(String econtent, String ephoto_url, Long etime,Long create_time) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = sdf.parse(etime);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (create_time == null) {
+			create_time = new Date().getTime();
 		}
-		System.out.println(date.getTime());
-		eventDao.add(econtent, ephoto_url, date.getTime(), new Date().getTime());
+		eventDao.add(econtent, ephoto_url, etime,create_time);
 	}
 
 	/**
@@ -91,10 +85,18 @@ public class EventServiceImpl implements EventService {
 	 * 
 	 * */
 	@Override
-	public void update(Integer id, String econtent, String ephoto_url,
-			Integer etime, Integer create_time) {
-		eventDao.update(id, econtent, ephoto_url, etime, create_time);
+	public void update(Integer eid, String econtent, String ephoto_url,
+			Long etime) {
+		eventDao.update(eid, econtent, ephoto_url,etime, new Date().getTime());
+
 	}
+
+	@Override
+	public Event findById(Integer id) {
+		Event event = eventDao.findById(id);
+		return event;
+	}
+
 
 	/**
 	 * 格式化对象的时间
@@ -114,4 +116,7 @@ public class EventServiceImpl implements EventService {
 		}
 		return events;
 	}
+
+
+
 }

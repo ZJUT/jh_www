@@ -55,7 +55,7 @@ public class IsValidFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 
 		@SuppressWarnings("unchecked")
 		List<String> errorList = (List<String>) request
@@ -67,10 +67,16 @@ public class IsValidFilter implements Filter {
 		/*
 		 * 验证token合法性
 		 */
-		String token = params.get("token")[0];
-		String appid = params.get("APPID")[0];
+		String token = null;
+		String appid = null;
 		String value = null;
-
+		
+		try {
+			token = params.get("token")[0];
+			appid = params.get("APPID")[0];
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("validError"));
+		}
 		if (appid != null)
 			value = properties.getProperty(appid);
 

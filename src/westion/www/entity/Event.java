@@ -28,9 +28,9 @@ public class Event {
 	@Expose
 	private String formatTime_create_time;
 	/**距离1970格式的事件时间*/
-	private Integer etime;
+	private Long etime;
 	/**距离1970格式的事件创建时间*/
-	private Integer create_time;
+	private Long create_time;
 
 
 	public String getFormatTime_etime() {
@@ -65,19 +65,19 @@ public class Event {
 		this.econtent = econtent;
 	}
 
-	public Integer getEtime() {
+	public Long getEtime() {
 		return etime;
 	}
 
-	public void setEtime(Integer etime) {
+	public void setEtime(Long etime) {
 		this.etime = etime;
 	}
 
-	public Integer getCreate_time() {
+	public Long getCreate_time() {
 		return create_time;
 	}
 
-	public void setCreate_time(Integer create_time) {
+	public void setCreate_time(Long create_time) {
 		this.create_time = create_time;
 	}
 

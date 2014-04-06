@@ -27,12 +27,12 @@ public class EventAction {
 	private Map<String, String[]> params = null;
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
-
+	/** 全局存放结果 */
 	private ArrayList<String> errorList = null;
-
+	
+	/** service层 */
 	private EventService eventService = new EventServiceImpl();
 
-	private HttpServletRequest request = null;
 
 	/**
 	 * 构造函数，从request中获取相应的属性，并对私有成员初始化
@@ -47,7 +47,23 @@ public class EventAction {
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (ArrayList<String>) (request.getAttribute("errorList"));
-		this.request = request;
+	}
+
+	/**
+	 * 获得一条事件
+	 * @return event Event
+	 * */
+	public Event getEvent() {
+		Event event = null;
+		try {
+			event = eventService
+					.findById(Integer.parseInt(params.get("eid")[0]));
+		} catch (QueryException e) {
+			errorList.add(properties.getProperty("sqlError"));
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("unknownError"));
+		}
+		return event;
 	}
 
 	/**

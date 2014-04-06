@@ -45,7 +45,7 @@ public class EventDaoImpl implements EventDao {
 			st = conn.prepareStatement("select * from event");
 			rs = st.executeQuery();
 
-			objects = JdbcUtls.GetObjects(conn, st, rs, Event.class);
+			objects = JdbcUtls.GetObjects(rs, Event.class);
 
 			events = new ArrayList<Event>();
 
@@ -77,8 +77,8 @@ public class EventDaoImpl implements EventDao {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, long etime,
-			long create_time) {
+	public void add(String econtent, String ephoto_url, Long etime,
+			Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
@@ -143,15 +143,15 @@ public class EventDaoImpl implements EventDao {
 	 * */
 	@Override
 	public void update(Integer id, String econtent, String ephoto_url,
-			Integer etime, Integer create_time) {
+			Long etime, Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
 					.prepareStatement("update event set econtent=?,ephoto_url=?,etime=?,create_time=? where eid=?");
 			st.setString(1, econtent);
 			st.setString(2, ephoto_url);
-			st.setInt(3, etime);
-			st.setInt(4, create_time);
+			st.setLong(3, etime);
+			st.setLong(4, create_time);
 			st.setInt(5, id);
 			int acount = st.executeUpdate();
 			if (acount == 0)
@@ -162,6 +162,28 @@ public class EventDaoImpl implements EventDao {
 		} finally {
 			JdbcUtls.close(conn, st, rs);
 		}
+	}
+
+	@Override
+	public Event findById(Integer eid) {
+		Event event = null;
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn.prepareStatement("select * from event where eid=?");
+			st.setInt(1, eid);
+			rs = st.executeQuery();
+			objects = JdbcUtls.GetObjects(rs, Event.class);
+			if (objects.size()==0) {
+				throw new QueryException();
+			}
+			event = (Event)objects.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new QueryException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+		return event;
 	}
 
 }

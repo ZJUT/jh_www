@@ -43,7 +43,7 @@ public class NoticeDaoImpl implements NoticeDao {
 			st = conn
 					.prepareStatement("select * from notice where create_time=(select max(create_time) from notice)");
 			rs = st.executeQuery();
-			objects = JdbcUtls.GetObjects(conn, st, rs, Notice.class);
+			objects = JdbcUtls.GetObjects(rs, Notice.class);
 			if (objects.size() == 0) {
 				throw new QueryException();
 			}

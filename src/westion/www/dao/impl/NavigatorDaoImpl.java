@@ -44,7 +44,7 @@ public class NavigatorDaoImpl implements NavigatorDao {
 			st = conn.prepareStatement("select * from navigator");
 			rs = st.executeQuery();
 
-			objects = JdbcUtls.GetObjects(conn, st, rs, Navigator.class);
+			objects = JdbcUtls.GetObjects(rs, Navigator.class);
 
 			navigators = new ArrayList<Navigator>();
 

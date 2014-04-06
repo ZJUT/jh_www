@@ -41,7 +41,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 			st = conn.prepareStatement("select * from user");
 			rs = st.executeQuery();
 
-			objects = JdbcUtls.GetObjects(conn, st, rs, AdminUser.class);
+			objects = JdbcUtls.GetObjects(rs, AdminUser.class);
 
 			AdminUsers = new ArrayList<AdminUser>();
 
@@ -70,7 +70,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 			st = conn.prepareStatement("select * from user where stu_id=?");
 			st.setString(1, stuId);
 			rs = st.executeQuery();
-			objects = JdbcUtls.GetObjects(conn, st, rs, AdminUser.class);
+			objects = JdbcUtls.GetObjects(rs, AdminUser.class);
 			if (objects.size() == 0) {
 				throw new QueryException();
 			}

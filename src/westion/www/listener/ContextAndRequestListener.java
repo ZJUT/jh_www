@@ -2,6 +2,7 @@ package westion.www.listener;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,12 @@ public class ContextAndRequestListener implements ServletContextListener,
 	public void requestInitialized(ServletRequestEvent sre) {
 		HttpServletRequest request = (HttpServletRequest) sre
 				.getServletRequest();
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		errorList = new ArrayList<String>();
 		request.setAttribute("errorList", errorList);
 		params = request.getParameterMap();
