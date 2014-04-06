@@ -1,7 +1,6 @@
 package westion.www.action;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,7 @@ import westion.www.service.impl.NoticeServiceImpl;
 
 /**
  * 
- * 导航业务类
+ * 通知请求类
  * 
  * @version 1.0, 2014-3-20
  * @author westion
@@ -21,11 +20,10 @@ import westion.www.service.impl.NoticeServiceImpl;
  */
 public class NoticeAction {
 
-	/** 请求参数 */
-	private Map<String, String[]> params = null;
+
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
-
+	/** 网站全局结果文件 */
 	private ArrayList<String> errorList = null;
 	
 	private NoticeService noticeService = new NoticeServiceImpl();
@@ -39,7 +37,6 @@ public class NoticeAction {
 	@SuppressWarnings("unchecked")
 	public NoticeAction(HttpServletRequest request) {
 		super();
-		this.params = request.getParameterMap();
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (ArrayList<String>) (request.getAttribute("errorList"));

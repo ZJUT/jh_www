@@ -1,23 +1,31 @@
 package westion.www.admin.action;
 
 import java.util.List;
+
 import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import westion.www.entity.Notice;
 import westion.www.service.NoticeService;
 import westion.www.service.impl.NoticeServiceImpl;
 import westion.www.utls.FileTool;
 
+/**
+ * 
+ * 通知请求类（管理员）
+ * 
+ * @version 1.0, 2014-3-20
+ * @author westion
+ * @since JDK1.7
+ * @see westion.www.dao.NoticeService
+ */
 public class AdminNoticeAction {
 
 	/** 请求参数 */
 	private Map<String, String[]> params = null;
-	/** 请求用户的session */
-	private HttpSession session = null;
+
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
 	/** 网站全局的返回状态文件 */
@@ -37,7 +45,6 @@ public class AdminNoticeAction {
 	public AdminNoticeAction(HttpServletRequest request) {
 		super();
 		this.params = (Map<String, String[]>) request.getAttribute("params");
-		this.session = request.getSession();
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (List<String>) request.getAttribute("errorList");
@@ -89,7 +96,7 @@ public class AdminNoticeAction {
 		}
 		try {
 			noticeService.delete(notice.getNid());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorList.add(properties.getProperty("sqlError"));

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import westion.www.dao.NavigatorDao;
-import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
@@ -149,6 +148,17 @@ public class NavigatorDaoImpl implements NavigatorDao {
 
 	}
 	
+	
+
+	/**
+	 * 查找一条导航标题，通过naid
+	 * 
+	 * @param Integer
+	 *            naid 导航主id
+	 * @throws QueryException
+	 *             查询失败，即查不到
+	 * 
+	 * */
 	@Override
 	public Navigator findById(Integer naid) {
 		Navigator navigator = null;

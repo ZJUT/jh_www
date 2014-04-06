@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import westion.www.exception.LoginException;
-
 /**
  * 
- * 接受管理员类的请求类
+ * 反射管理员类的请求类，调用对应的action类
  * 
  * @version 1.0, 2014-3-20
  * @author westion
@@ -56,8 +54,8 @@ public class AdminServlet extends HttpServlet {
 		String action[] = params.get("action");
 
 		try {
-			Class<?> clz = Class.forName("westion.www.admin.action.Admin" + model[0]
-					+ "Action");
+			Class<?> clz = Class.forName("westion.www.admin.action.Admin"
+					+ model[0] + "Action");
 			Method method = clz.getMethod(action[0]);
 			Constructor<?> constructor = clz
 					.getConstructor(HttpServletRequest.class);
@@ -75,11 +73,20 @@ public class AdminServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * 接受管理员类的POST请求响应的函数
+	 * 
+	 * @param request
+	 *            HttpServletRequest
+	 * @param response
+	 *            HttpServletResponse
+	 * @throws ServletException
+	 * @throws IOException
+	 * */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
-	
+
 }

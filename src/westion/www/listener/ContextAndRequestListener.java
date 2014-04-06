@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
  * Context和request的监听器 主要功能，初始化context域与request域的一些对象 Properties errorList
  * params
  * 
+ * 初始化request的编码UTF\-8
+ * 
  * @version 1.0, 2014-4-2
  * @author westion
  * @since JDK1.7

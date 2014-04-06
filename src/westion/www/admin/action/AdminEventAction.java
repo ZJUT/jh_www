@@ -5,20 +5,25 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import westion.www.entity.Event;
 import westion.www.service.EventService;
 import westion.www.service.impl.EventServiceImpl;
 import westion.www.utls.FileTool;
 import westion.www.utls.TimeFormat;
 
+/**
+ * 
+ * 事件请求类（管理员）
+ * 
+ * @version 1.0, 2014-3-20
+ * @author westion
+ * @since JDK1.7
+ * @see westion.www.dao.EventService
+ */
 public class AdminEventAction {
 
 	/** 请求参数 */
 	private Map<String, String[]> params = null;
-	/** 请求用户的session */
-	private HttpSession session = null;
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
 	/** 网站全局的返回状态文件 */
@@ -38,7 +43,6 @@ public class AdminEventAction {
 	public AdminEventAction(HttpServletRequest request) {
 		super();
 		this.params = (Map<String, String[]>) request.getAttribute("params");
-		this.session = request.getSession();
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (List<String>) request.getAttribute("errorList");
@@ -110,7 +114,7 @@ public class AdminEventAction {
 	}
 
 	/**
-	 * 修改一条事件
+	 * 修改一条事件，并可修改图片
 	 * */
 	public void updateEvent() {
 		Event event = null;

@@ -164,6 +164,16 @@ public class EventDaoImpl implements EventDao {
 		}
 	}
 
+	
+	/**
+	 * 查找一条事件，通过eid
+	 * 
+	 * @param Integer
+	 *            eid 事件主id
+	 * @throws QueryException
+	 *             查询失败，即查不到
+	 * 
+	 * */
 	@Override
 	public Event findById(Integer eid) {
 		Event event = null;

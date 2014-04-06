@@ -4,9 +4,8 @@ package westion.www.exception;
 
 /**
  * 
- * 实体获取错误
- * 
- * @version 1.0, 2014-3-20
+ * 数据库查询失败
+ * @version 1.0, 2014-4-6
  * @author westion
  * @since JDK1.7
  */
@@ -14,8 +13,13 @@ public class QueryException extends RuntimeException {
 
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public QueryException() {
-		super("get entity error");
+		super("can not query find");
 		
 	}
 

@@ -14,13 +14,14 @@ import westion.www.service.impl.NavigatorServiceImpl;
 
 /**
  * 
- * 导航增添
+ * 导航请求类（管理员）
  * 
- * @version 1.0, 2014-3-20
+ * @version 1.0, 2014-4-6
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.AdminUserService
+ * @see westion.www.dao.NavigatorService
  */
+
 public class AdminNavigatorAction {
 
 	/** 请求参数 */

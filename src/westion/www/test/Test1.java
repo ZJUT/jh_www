@@ -5,8 +5,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import westion.www.service.NoticeService;
-import westion.www.service.impl.NoticeServiceImpl;
 
 /**
  * 

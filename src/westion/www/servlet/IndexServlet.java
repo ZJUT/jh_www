@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 
- * 接受非管理员类的请求类
+ * 反射非管理员类的请求，调用对应的action类
  * 
  * @version 1.0, 2014-3-20
  * @author westion

@@ -8,14 +8,13 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import westion.www.entity.Event;
-import westion.www.exception.AddException;
 import westion.www.exception.QueryException;
 import westion.www.service.EventService;
 import westion.www.service.impl.EventServiceImpl;
 
 /**
  * 
- * 事件业务类
+ * 事件请求类
  * 
  * @version 1.0, 2014-3-20
  * @author westion

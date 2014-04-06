@@ -15,12 +15,21 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
+ * 
+ * 文件上传和删除工具类
+ * 
  * 具体步骤： 1）获得磁盘文件条目工厂 DiskFileItemFactory 要导包 2） 利用 request 获取 真实路径 ，供临时文件存储，和
  * 最终文件存储 ，这两个存储位置可不同，也可相同 3）对 DiskFileItemFactory 对象设置一些 属性 4）高水平的API文件上传处理
  * ServletFileUploadupload = new ServletFileUpload(factory);
  * 目的是调用parseRequest（request）方法 获得 FileItem 集合list ， 5）在 FileItem 对象中 获取信息， 遍历，
  * 判断 表单提交过来的信息 是否是 普通文本信息 另做处理 6） 第一种. 用第三方 提供的 item.write( new
  * File(path,filename) ); 直接写到磁盘上 第二种. 手动处理
+ * 
+ * 
+ * @version 1.0, 2014-4-6
+ * @author westion
+ * @since JDK1.7
+ * @see org.apache.commons.fileupload
  */
 public class FileTool {
 
@@ -56,9 +65,10 @@ public class FileTool {
 				// 如果获取的 表单信息是普通的 文本 信息
 				if (item.isFormField()) {
 					// 获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的
+					//获取字符的编码
 					String value = item.getString("UTF-8");
 					if (value.equals("")) {
-						value=null;
+						value = null;
 					}
 					request.setAttribute(name, value);
 				}

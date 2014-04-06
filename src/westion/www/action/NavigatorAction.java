@@ -8,7 +8,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import westion.www.dao.impl.NavigatorDaoImpl;
-import westion.www.entity.Event;
 import westion.www.entity.Navigator;
 import westion.www.exception.QueryException;
 import westion.www.service.NavigatorService;
@@ -16,7 +15,7 @@ import westion.www.service.impl.NavigatorServiceImpl;
 
 /**
  * 
- * 导航业务类
+ * 导航请求类
  * 
  * @version 1.0, 2014-3-20
  * @author westion
@@ -28,7 +27,7 @@ public class NavigatorAction {
 	private Map<String, String[]> params = null;
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
-
+	/** 网站全局结果文件 */
 	private ArrayList<String> errorList = null;
 
 	/** Dao层对应操作实例 {@link NavigatorDaoImpl#NavigatorDaoImpl()} */
@@ -69,7 +68,7 @@ public class NavigatorAction {
 	}
 	
 	/**
-	 * 获得一条事件
+	 * 获得一条导航
 	 * @return event Event
 	 * */
 	public Navigator getNavigator() {

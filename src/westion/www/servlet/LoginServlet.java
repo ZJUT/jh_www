@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import westion.www.admin.action.AdminUserAction;
-import westion.www.exception.LoginException;
 
 /**
  * 
- * 接受管理员类的请求类
+ * 处理管理员登录
  * 
  * @version 1.0, 2014-3-20
  * @author westion

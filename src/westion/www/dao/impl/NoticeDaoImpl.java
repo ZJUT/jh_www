@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import westion.www.dao.NoticeDao;
-import westion.www.entity.Navigator;
 import westion.www.entity.Notice;
 import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
@@ -159,7 +158,12 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 
 	/**
-	 * 获得一条通知
+	 * 获得一条通知,通过nid
+	 * @param Integer
+	 *            nid 通知主id
+	 * @throws QueryException
+	 *             查询失败，即查不到
+	 * 
 	 * */
 	@Override
 	public Notice findById(Integer nid) {

@@ -20,7 +20,9 @@ import westion.www.utls.ReturnData;
 
 /**
  * 
- * 最顶层过滤器（在所有过滤器和资源之上） 主要功能，验证token的合法性和统一最后封装对象，返回json格式的数据
+ * 最顶层过滤器（在所有过滤器和资源之上） 主要功能，验证token的合法性和统一最后封装对象，返回json格式的数据]
+ * 
+ * 设置response编码,返回给浏览器的ContentType text/html;charset=UTF\-8
  * 
  * @version 1.0, 2014-3-20
  * @author westion

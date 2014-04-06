@@ -4,6 +4,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import westion.www.exception.TimeFormatException;
+
+/**
+ * 时间格式化工具类
+ * 
+ * @version 1.0, 2014-4-4
+ * @author westion
+ * @since JDK1.7
+ */
 public class TimeFormat {
 	
 	

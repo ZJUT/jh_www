@@ -12,14 +12,18 @@ public class LoginException extends RuntimeException {
 
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LoginException(Throwable arg0) {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
 
 	public LoginException() {
-		super();
-		// TODO Auto-generated constructor stub
+		super("can not login");
 	}
 
 	

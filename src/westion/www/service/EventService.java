@@ -4,6 +4,16 @@ import java.util.List;
 
 import westion.www.entity.Event;
 
+
+/**
+ * 
+ * 数据库event表Service类接口
+ * 
+ * @version 1.0, 2014-4-6
+ * @author westion
+ * @since JDK1.7
+ * 
+ */
 public interface EventService {
 
 	List<Event> list();

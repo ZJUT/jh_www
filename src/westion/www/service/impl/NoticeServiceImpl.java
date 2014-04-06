@@ -15,6 +15,12 @@ public class NoticeServiceImpl implements NoticeService {
 	/** Dao层对应操作实例 {@link NoticeDaoImpl#NoticeDaoImpl()} */
 	private NoticeDao noticeDao = new NoticeDaoImpl();
 
+	/**
+	 * 获取最近的一条通知
+	 * 
+	 * @param id
+	 *            Integer
+	 */
 	@Override
 	public Notice getNew() {
 		List<Notice> list = new ArrayList<Notice>();
@@ -23,6 +29,18 @@ public class NoticeServiceImpl implements NoticeService {
 		return notice;
 	}
 
+	/**
+	 * 增加一条通知
+	 * 
+	 * @param ncontent
+	 *            String
+	 * @param destination_url
+	 *            String
+	 * @param nphoto_url
+	 *            String
+	 * @param create_time
+	 *            Long
+	 */
 	@Override
 	public void add(String ncontent, String destination_url, String nphoto_url,
 			Long create_time) {
@@ -33,19 +51,40 @@ public class NoticeServiceImpl implements NoticeService {
 
 	}
 
+	/**
+	 * 删除一条通知
+	 * 
+	 * @param id
+	 *            Integer
+	 */
 	@Override
 	public void delete(Integer id) {
 		noticeDao.delete(id);
 
 	}
 
+	/**
+	 * 更新一条通知
+	 * 
+	 * @param id
+	 *            Integer
+	 * @param ncontent
+	 *            String
+	 * @param destination_url
+	 *            String
+	 * @param nphoto_url
+	 *            String
+	 * @param create_time
+	 *            Long
+	 */
 	@Override
 	public void update(Integer id, String ncontent, String destination_url,
 			String nphoto_url, Long create_time) {
 		if (create_time == null) {
 			create_time = new Date().getTime();
 		}
-		noticeDao.update(id, ncontent, destination_url, nphoto_url, create_time);
+		noticeDao
+				.update(id, ncontent, destination_url, nphoto_url, create_time);
 
 	}
 
@@ -67,7 +106,12 @@ public class NoticeServiceImpl implements NoticeService {
 		return notices;
 	}
 
-	
+	/**
+	 * 获取一条通知
+	 * 
+	 * @param id
+	 *            Integer
+	 */
 	@Override
 	public Notice findById(Integer id) {
 		return noticeDao.findById(id);

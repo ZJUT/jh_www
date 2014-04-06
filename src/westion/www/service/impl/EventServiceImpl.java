@@ -1,6 +1,5 @@
 package westion.www.service.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +12,15 @@ import westion.www.exception.DeleteException;
 import westion.www.exception.UpdateException;
 import westion.www.service.EventService;
 
+
+/**
+ * 
+ * 数据库event表Service类接口实现
+ * 
+ * @version 1.0, 2014-4-6
+ * @author westion
+ * @since JDK1.7
+ */
 public class EventServiceImpl implements EventService {
 
 	/** Dao层对应操作实例 {@link EventDaoImpl#EventDaoImpl()} */
@@ -94,6 +102,13 @@ public class EventServiceImpl implements EventService {
 
 	}
 
+	/**
+	 * 获取单个事件通过主键id
+	 * 
+	 * @param id
+	 *           Integer
+	 * @return Event
+	 */
 	@Override
 	public Event findById(Integer id) {
 		Event event = eventDao.findById(id);

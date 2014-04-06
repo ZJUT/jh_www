@@ -2,6 +2,16 @@ package westion.www.service;
 
 import westion.www.entity.Notice;
 
+
+/**
+ * 
+ * 数据库notice表Service类接口
+ * 
+ * @version 1.0, 2014-4-6
+ * @author westion
+ * @since JDK1.7
+ * 
+ */
 public interface NoticeService {
 	Notice getNew();
 
