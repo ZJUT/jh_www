@@ -19,7 +19,7 @@ import westion.www.utls.FileTool;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.NoticeService
+ * @see westion.www.service.NoticeService
  */
 public class AdminNoticeAction {
 

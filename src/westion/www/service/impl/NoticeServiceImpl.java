@@ -18,8 +18,6 @@ public class NoticeServiceImpl implements NoticeService {
 	/**
 	 * 获取最近的一条通知
 	 * 
-	 * @param id
-	 *            Integer
 	 */
 	@Override
 	public Notice getNew() {

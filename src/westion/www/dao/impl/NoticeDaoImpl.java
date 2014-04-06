@@ -95,8 +95,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	/**
 	 * 删除一条通知
 	 * 
-	 * @param Integer
-	 *            id 通知主id
+	 * @param id
+	 *            Integer 通知主id
 	 * @throws DeleteException
 	 *             删除失败
 	 * 
@@ -159,8 +159,9 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	/**
 	 * 获得一条通知,通过nid
-	 * @param Integer
-	 *            nid 通知主id
+	 * 
+	 * @param nid
+	 *            Integer 通知主id
 	 * @throws QueryException
 	 *             查询失败，即查不到
 	 * 

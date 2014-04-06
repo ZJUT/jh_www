@@ -29,7 +29,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
  * @version 1.0, 2014-4-6
  * @author westion
  * @since JDK1.7
- * @see org.apache.commons.fileupload
  */
 public class FileTool {
 
@@ -121,7 +120,6 @@ public class FileTool {
 	/**
 	 * @param filePath
 	 *            String 文件的路径
-	 * @return boolean 文件删除是否成功
 	 * */
 	public static void deleteFile(String filePath) {
 		try {

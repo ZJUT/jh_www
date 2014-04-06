@@ -19,7 +19,7 @@ import westion.www.service.impl.EventServiceImpl;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.EventService
+ * @see westion.www.service.EventService
  */
 public class EventAction {
 	/** ÇëÇó²ÎÊý */

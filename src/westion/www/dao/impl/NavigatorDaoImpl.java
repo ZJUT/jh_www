@@ -91,8 +91,8 @@ public class NavigatorDaoImpl implements NavigatorDao {
 	/**
 	 * 删除一个导航条目
 	 * 
-	 * @param Integer
-	 *            id 事件主id
+	 * @param id
+	 *            Integer 事件主id
 	 * @throws DeleteException
 	 *             删除失败
 	 * 
@@ -115,7 +115,6 @@ public class NavigatorDaoImpl implements NavigatorDao {
 
 	}
 
-	
 	/**
 	 * 修改一个导航条目
 	 * 
@@ -147,14 +146,12 @@ public class NavigatorDaoImpl implements NavigatorDao {
 		}
 
 	}
-	
-	
 
 	/**
 	 * 查找一条导航标题，通过naid
 	 * 
-	 * @param Integer
-	 *            naid 导航主id
+	 * @param naid
+	 *            Integer 导航主id
 	 * @throws QueryException
 	 *             查询失败，即查不到
 	 * 
@@ -168,10 +165,10 @@ public class NavigatorDaoImpl implements NavigatorDao {
 			st.setInt(1, naid);
 			rs = st.executeQuery();
 			objects = JdbcUtls.GetObjects(rs, Navigator.class);
-			if (objects.size()==0) {
+			if (objects.size() == 0) {
 				throw new QueryException();
 			}
-			navigator = (Navigator)objects.get(0);
+			navigator = (Navigator) objects.get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new QueryException(e);

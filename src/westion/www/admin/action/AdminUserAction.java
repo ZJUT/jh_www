@@ -20,7 +20,7 @@ import westion.www.service.impl.AdminUserServiceImpl;
  * @version 1.0, 2014-3-20
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.AdminUserService
+ * @see westion.www.service.AdminUserService
  */
 public class AdminUserAction {
 

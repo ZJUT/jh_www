@@ -19,7 +19,7 @@ import westion.www.service.impl.NavigatorServiceImpl;
  * @version 1.0, 2014-4-6
  * @author westion
  * @since JDK1.7
- * @see westion.www.dao.NavigatorService
+ * @see westion.www.service.NavigatorService
  */
 
 public class AdminNavigatorAction {

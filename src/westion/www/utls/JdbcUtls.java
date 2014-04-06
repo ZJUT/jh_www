@@ -114,10 +114,6 @@ public final class JdbcUtls {
 	/**
 	 * 将查询获得结果封装为对象，并关闭一次查询的流 通过数据表的属性名与实体类的成员名进行内省生成对象
 	 * 
-	 * @param conn
-	 *            Connection
-	 * @param st
-	 *            Statement
 	 * @param rs
 	 *            ResultSet
 	 * @param clz

@@ -101,8 +101,8 @@ public class EventDaoImpl implements EventDao {
 	/**
 	 * 删除一条事件
 	 * 
-	 * @param Integer
-	 *            id 事件主id
+	 * @param id
+	 *            Integer 事件主id
 	 * @throws DeleteException
 	 *             删除失败
 	 * 
@@ -127,16 +127,16 @@ public class EventDaoImpl implements EventDao {
 	/**
 	 * 修改一条事件
 	 * 
-	 * @param Integer
-	 *            id 事件主id
+	 * @param id
+	 *            Integer 事件主id
 	 * @param econtent
 	 *            String 事件内容
 	 * @param ephoto_url
 	 *            String 事件图片
 	 * @param etime
-	 *            Integer 事件的时间
+	 *            Long 事件的时间
 	 * @param create_time
-	 *            Integer 事件发布时间
+	 *            Long 事件发布时间
 	 * @throws UpdateException
 	 *             更新失败
 	 * 
@@ -164,12 +164,11 @@ public class EventDaoImpl implements EventDao {
 		}
 	}
 
-	
 	/**
 	 * 查找一条事件，通过eid
 	 * 
-	 * @param Integer
-	 *            eid 事件主id
+	 * @param eid
+	 *            Integer 事件主id
 	 * @throws QueryException
 	 *             查询失败，即查不到
 	 * 
@@ -183,10 +182,10 @@ public class EventDaoImpl implements EventDao {
 			st.setInt(1, eid);
 			rs = st.executeQuery();
 			objects = JdbcUtls.GetObjects(rs, Event.class);
-			if (objects.size()==0) {
+			if (objects.size() == 0) {
 				throw new QueryException();
 			}
-			event = (Event)objects.get(0);
+			event = (Event) objects.get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new QueryException(e);
