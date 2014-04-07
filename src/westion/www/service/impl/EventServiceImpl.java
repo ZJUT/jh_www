@@ -1,6 +1,7 @@
 package westion.www.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,13 +53,13 @@ public class EventServiceImpl implements EventService {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, Long etime,
-			Long create_time) {
+	public void add(String econtent, String etitle, String ephoto_url,
+			Long etime, Long create_time) {
 
 		if (create_time == null) {
 			create_time = new Date().getTime();
 		}
-		eventDao.add(econtent, ephoto_url, etime, create_time);
+		eventDao.add(econtent, etitle, ephoto_url, etime, create_time);
 	}
 
 	/**
@@ -93,12 +94,12 @@ public class EventServiceImpl implements EventService {
 	 * 
 	 * */
 	@Override
-	public void update(Integer eid, String econtent, String ephoto_url,
-			Long etime, Long create_time) {
+	public void update(Integer eid, String econtent, String etitle,
+			String ephoto_url, Long etime, Long create_time) {
 		if (create_time == null) {
 			create_time = new Date().getTime();
 		}
-		eventDao.update(eid, econtent, ephoto_url, etime, create_time);
+		eventDao.update(eid, econtent, etitle, ephoto_url, etime, create_time);
 
 	}
 
@@ -112,7 +113,9 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event findById(Integer id) {
 		Event event = eventDao.findById(id);
-		return event;
+		List<Event> events = new ArrayList<Event>();
+		events.add(event);
+		return formatTime(events).get(0);
 	}
 
 	/**

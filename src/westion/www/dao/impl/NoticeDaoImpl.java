@@ -154,7 +154,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		} finally {
 			JdbcUtls.close(conn, st, rs);
 		}
-
+System.out.println();
 	}
 
 	/**

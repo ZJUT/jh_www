@@ -112,6 +112,9 @@ public class NoticeServiceImpl implements NoticeService {
 	 */
 	@Override
 	public Notice findById(Integer id) {
-		return noticeDao.findById(id);
+		List<Notice> list = new ArrayList<Notice>();
+		list.add(noticeDao.findById(id));
+		Notice notice = formatTime(list).get(0);
+		return notice;
 	}
 }

@@ -19,10 +19,10 @@ public interface EventDao {
 
 	void delete(Integer id);
 
-	void add(String econtent, String ephoto_url, Long etime, Long create_time);
+	void add(String econtent, String etitle,String ephoto_url, Long etime, Long create_time);
 
 	Event findById(Integer eid);
 
-	void update(Integer eid, String econtent, String ephoto_url, Long etime,
+	void update(Integer eid, String econtent, String etitle, String ephoto_url, Long etime,
 			Long create_time);
 }

@@ -53,7 +53,7 @@ public class NavigatorAction {
 	/**
 	 * 获取所有导航信息
 	 * 
-	 * @return events List\<Navigator\>
+	 * @return navigators List\<Navigator\>
 	 */
 	public List<Navigator> list() {
 		List<Navigator> navigators = null;
@@ -69,7 +69,7 @@ public class NavigatorAction {
 	
 	/**
 	 * 获得一条导航
-	 * @return event Event
+	 * @return navigator Navigator
 	 * */
 	public Navigator getNavigator() {
 		Navigator navigator = null;

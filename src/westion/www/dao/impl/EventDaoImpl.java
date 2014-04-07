@@ -66,6 +66,8 @@ public class EventDaoImpl implements EventDao {
 	 * 
 	 * @param econtent
 	 *            String 事件内容
+	 * @param etitle
+	 *            String 事件标题
 	 * @param ephoto_url
 	 *            String 事件图片
 	 * @param etime
@@ -77,16 +79,17 @@ public class EventDaoImpl implements EventDao {
 	 * 
 	 * */
 	@Override
-	public void add(String econtent, String ephoto_url, Long etime,
-			Long create_time) {
+	public void add(String econtent, String etitle, String ephoto_url,
+			Long etime, Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
-					.prepareStatement("insert into event(econtent,ephoto_url,etime,create_time)values(?,?,?,?)");
+					.prepareStatement("insert into event(econtent,etitle,ephoto_url,etime,create_time)values(?,?,?,?,?)");
 			st.setString(1, econtent);
-			st.setString(2, ephoto_url);
-			st.setLong(3, etime);
-			st.setLong(4, create_time);
+			st.setString(2, etitle);
+			st.setString(3, ephoto_url);
+			st.setLong(4, etime);
+			st.setLong(5, create_time);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new AddException();
@@ -142,17 +145,18 @@ public class EventDaoImpl implements EventDao {
 	 * 
 	 * */
 	@Override
-	public void update(Integer id, String econtent, String ephoto_url,
-			Long etime, Long create_time) {
+	public void update(Integer id, String econtent, String etitle,
+			String ephoto_url, Long etime, Long create_time) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
-					.prepareStatement("update event set econtent=?,ephoto_url=?,etime=?,create_time=? where eid=?");
+					.prepareStatement("update event set econtent=?,etitle=?,ephoto_url=?,etime=?,create_time=? where eid=?");
 			st.setString(1, econtent);
-			st.setString(2, ephoto_url);
-			st.setLong(3, etime);
-			st.setLong(4, create_time);
-			st.setInt(5, id);
+			st.setString(2, etitle);
+			st.setString(3, ephoto_url);
+			st.setLong(4, etime);
+			st.setLong(5, create_time);
+			st.setInt(6, id);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new UpdateException();

@@ -4,7 +4,6 @@ import java.util.List;
 
 import westion.www.entity.Event;
 
-
 /**
  * 
  * 数据库event表Service类接口
@@ -22,9 +21,9 @@ public interface EventService {
 
 	Event findById(Integer id);
 
+	void add(String econtent, String etitle, String ephoto_url, Long etime,
+			Long create_time);
 
-	void add(String econtent, String ephoto_url, Long etime,Long create_time);
-
-	void update(Integer eid, String econtent, String ephoto_url, Long etime,
+	void update(Integer eid, String econtent,String etitle, String ephoto_url, Long etime,
 			Long create_time);
 }

@@ -18,6 +18,9 @@ public class Event {
 	/**事件内容*/
 	@Expose
 	private String econtent;
+	/**事件标题*/
+	@Expose
+	private String etitle;
 	/**事件图片*/
 	@Expose
 	private String ephoto_url;
@@ -87,6 +90,14 @@ public class Event {
 
 	public void setEphoto_url(String ephoto_url) {
 		this.ephoto_url = ephoto_url;
+	}
+
+	public String getEtitle() {
+		return etitle;
+	}
+
+	public void setEtitle(String etitle) {
+		this.etitle = etitle;
 	}
 
 }

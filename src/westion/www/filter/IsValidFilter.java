@@ -57,9 +57,11 @@ public class IsValidFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		
+		HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-
+		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		@SuppressWarnings("unchecked")
 		List<String> errorList = (List<String>) request
 				.getAttribute("errorList");
@@ -91,6 +93,7 @@ public class IsValidFilter implements Filter {
 		}
 
 		PrintWriter out = ((HttpServletResponse) response).getWriter();
+
 
 		// 用于封装数据生成json
 		ReturnData resultData = new ReturnData();

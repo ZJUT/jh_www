@@ -66,7 +66,7 @@ public class AdminEventAction {
 			if (filename != null)
 				address = properties.getProperty("eventPhotoDir") + filename;
 			eventService.add(
-					(String) request.getAttribute("econtent"),
+					(String) request.getAttribute("econtent"),(String) request.getAttribute("etitle"),
 					address,
 					TimeFormat.changeToLongTime(
 							(String) request.getAttribute("etime")).getTime(),
@@ -106,7 +106,7 @@ public class AdminEventAction {
 				FileTool.deleteFile(this.request.getServletContext()
 						.getRealPath("/" + filename));
 		} catch (Exception e) {
-			eventService.add(event.getEcontent(), event.getEphoto_url(),
+			eventService.add(event.getEcontent(), event.getEphoto_url(),event.getEtitle(),
 					event.getEtime(), event.getCreate_time());
 			errorList.add(properties.getProperty("sqlError"));
 		}
@@ -151,7 +151,7 @@ public class AdminEventAction {
 				address = properties.getProperty("eventPhotoDir") + filename;
 			eventService.update(
 					event.getEid(),
-					(String) request.getAttribute("econtent"),
+					(String) request.getAttribute("econtent"),(String) request.getAttribute("etitle"),
 					address,
 					TimeFormat.changeToLongTime(
 							(String) request.getAttribute("etime")).getTime(),

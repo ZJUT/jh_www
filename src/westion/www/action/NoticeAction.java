@@ -1,9 +1,12 @@
 package westion.www.action;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
+
+import westion.www.entity.Navigator;
 import westion.www.entity.Notice;
 import westion.www.exception.QueryException;
 import westion.www.service.NoticeService;
@@ -20,7 +23,8 @@ import westion.www.service.impl.NoticeServiceImpl;
  */
 public class NoticeAction {
 
-
+	/** 请求参数 */
+	private Map<String, String[]> params = null;
 	/** 网站全局的配置文件 */
 	private Properties properties = null;
 	/** 网站全局结果文件 */
@@ -40,6 +44,7 @@ public class NoticeAction {
 		this.properties = (Properties) request.getServletContext()
 				.getAttribute("pageConfig");
 		this.errorList = (ArrayList<String>) (request.getAttribute("errorList"));
+		this.params = request.getParameterMap();
 	}
 
 	/**
@@ -58,5 +63,20 @@ public class NoticeAction {
 		}
 		return notice;
 	}
-
+	
+	/**
+	 * 获得一条指定通知
+	 * @return event Notice
+	 * */
+	public Notice getNotice() {
+		Notice notice = null;
+		try {
+			notice = noticeService.findById(Integer.parseInt(params.get("nid")[0]));
+		} catch (QueryException e) {
+			errorList.add(properties.getProperty("sqlError"));
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("unknownError"));
+		}
+		return notice;
+	}
 }
