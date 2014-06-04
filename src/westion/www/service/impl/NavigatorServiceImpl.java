@@ -30,8 +30,8 @@ public class NavigatorServiceImpl implements NavigatorService {
 	 * @param destination_url String
 	 */
 	@Override
-	public void add(String naname, String destination_url) {
-		navigatorDao.add(naname, destination_url);
+	public void add(String naname, String destination_url,Integer weight) {
+		navigatorDao.add(naname, destination_url,weight);
 		
 	}
 
@@ -54,8 +54,8 @@ public class NavigatorServiceImpl implements NavigatorService {
 	 * @param destination_url String
 	 */
 	@Override
-	public void update(Integer id, String naname, String destination_url) {
-		navigatorDao.update(id, naname, destination_url);
+	public void update(Integer id, String naname, String destination_url,Integer weight) {
+		navigatorDao.update(id, naname, destination_url,weight);
 	}
 	
 	/**

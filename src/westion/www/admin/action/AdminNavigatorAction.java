@@ -60,7 +60,8 @@ public class AdminNavigatorAction {
 		try {
 			String[] naname = params.get("naname");
 			String[] destination_url = params.get("destination_url");
-			navigatorService.add(naname[0], destination_url[0]);
+			String[] weight = params.get("weight");
+			navigatorService.add(naname[0], destination_url[0],Integer.parseInt(weight[0]));
 		} catch (AddException e) {
 			e.printStackTrace();
 			errorList.add(properties.getProperty("sqlError"));
@@ -97,7 +98,8 @@ public class AdminNavigatorAction {
 			String[] naname = params.get("naname");
 			String[] destination_url = params.get("destination_url");
 			String[] naid = params.get("naid");
-			navigatorService.update(Integer.parseInt(naid[0]), naname[0], destination_url[0]);
+			String[] weight = params.get("weight");
+			navigatorService.update(Integer.parseInt(naid[0]), naname[0], destination_url[0],Integer.parseInt(weight[0]));
 		} catch (UpdateException e) {
 			errorList.add(properties.getProperty("sqlError"));
 		} catch (Exception e) {

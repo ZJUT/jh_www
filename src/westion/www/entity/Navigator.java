@@ -22,8 +22,17 @@ public class Navigator {
 	@Expose
 	private String destination_url;
 	
+	/**导航项权重，排序用*/
+	@Expose
+	private Integer weight;
 	
 	
+	public Integer getWeight() {
+		return weight;
+	}
+	public void setWeight(Integer weight) {
+		this.weight = weight;
+	}
 	public Integer getNaid() {
 		return naid;
 	}

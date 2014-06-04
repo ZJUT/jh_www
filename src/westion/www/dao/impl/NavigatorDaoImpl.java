@@ -41,7 +41,8 @@ public class NavigatorDaoImpl implements NavigatorDao {
 		List<Navigator> navigators = null;
 		try {
 			conn = JdbcUtls.getConnection();
-			st = conn.prepareStatement("select * from navigator");
+			st = conn
+					.prepareStatement("select * from navigator order by weight");
 			rs = st.executeQuery();
 
 			objects = JdbcUtls.GetObjects(rs, Navigator.class);
@@ -65,18 +66,21 @@ public class NavigatorDaoImpl implements NavigatorDao {
 	 *            String 导航条目内容
 	 * @param destination_url
 	 *            String 导航目的链接
+	 * @param weight
+	 *            Integer 导航项权重
 	 * @throws AddException
 	 *             添加失败
 	 * 
 	 * */
 	@Override
-	public void add(String naname, String destination_url) {
+	public void add(String naname, String destination_url, Integer weight) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
-					.prepareStatement("insert into navigator(naname,destination_url)values(?,?)");
+					.prepareStatement("insert into navigator(naname,destination_url,weight)values(?,?,?)");
 			st.setString(1, naname);
 			st.setString(2, destination_url);
+			st.setInt(3, weight);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new AddException();
@@ -122,19 +126,23 @@ public class NavigatorDaoImpl implements NavigatorDao {
 	 *            String 导航条目内容
 	 * @param destination_url
 	 *            String 导航目的链接
+	 * @param  weight 
+	 *			 Integer 导航项的权重
 	 * @throws AddException
 	 *             添加失败
 	 * 
 	 * */
 	@Override
-	public void update(Integer id, String naname, String destination_url) {
+	public void update(Integer id, String naname, String destination_url,
+			Integer weight) {
 		try {
 			conn = JdbcUtls.getConnection();
 			st = conn
-					.prepareStatement("update navigator set naname=?,destination_url=? where naid=?");
+					.prepareStatement("update navigator set naname=?,destination_url=?,weight=? where naid=?");
 			st.setString(1, naname);
 			st.setString(2, destination_url);
-			st.setInt(3, id);
+			st.setInt(3, weight);
+			st.setInt(4, id);
 			int acount = st.executeUpdate();
 			if (acount == 0)
 				throw new UpdateException();

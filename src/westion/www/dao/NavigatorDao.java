@@ -17,12 +17,14 @@ public interface NavigatorDao {
 
 	List<Navigator> list();
 
-	void add(String naname, String destination_url);
-
 	void delete(Integer id);
 
-	void update(Integer id, String naname, String destination_url);
 
 	Navigator findById(Integer eid);
+
+	void add(String naname, String destination_url, Integer weight);
+
+	void update(Integer id, String naname, String destination_url,
+			Integer weight);
 
 }

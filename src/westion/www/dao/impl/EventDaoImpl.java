@@ -42,7 +42,7 @@ public class EventDaoImpl implements EventDao {
 		List<Event> events = null;
 		try {
 			conn = JdbcUtls.getConnection();
-			st = conn.prepareStatement("select * from event");
+			st = conn.prepareStatement("select * from event order by etime desc");
 			rs = st.executeQuery();
 
 			objects = JdbcUtls.GetObjects(rs, Event.class);
