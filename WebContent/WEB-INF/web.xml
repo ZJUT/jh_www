@@ -57,8 +57,17 @@
 
 	<filter-mapping>
 		<filter-name>IsVaidFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>IndexServlet</servlet-name>
 	</filter-mapping>
+		<filter-mapping>
+		<filter-name>IsVaidFilter</filter-name>
+		<servlet-name>AdminServlet</servlet-name>
+	</filter-mapping>
+		<filter-mapping>
+		<filter-name>IsVaidFilter</filter-name>
+		<servlet-name>LoginServlet</servlet-name>
+	</filter-mapping>
+	
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/admin/api</url-pattern>

@@ -56,6 +56,9 @@ public class NavigatorDaoImpl implements NavigatorDao {
 			e.printStackTrace();
 			throw new QueryException(e);
 		}
+		finally {
+			JdbcUtls.close(conn, st, rs);
+		}
 		return navigators;
 	}
 

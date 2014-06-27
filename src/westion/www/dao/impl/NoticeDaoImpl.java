@@ -51,6 +51,9 @@ public class NoticeDaoImpl implements NoticeDao {
 			e.printStackTrace();
 			throw new QueryException(e);
 		}
+		finally {
+			JdbcUtls.close(conn, st, rs);
+		}
 		return (Notice) objects.get(0);
 	}
 
