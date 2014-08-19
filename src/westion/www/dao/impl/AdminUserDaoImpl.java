@@ -51,6 +51,9 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		} catch (Exception e) {
 			throw new QueryException(e);
 		}
+		finally {
+			JdbcUtls.close(conn, st, rs);
+		}
 		return AdminUsers;
 	}
 
@@ -76,6 +79,9 @@ public class AdminUserDaoImpl implements AdminUserDao {
 			}
 		} catch (Exception e) {
 			throw new QueryException(e);
+		}
+		finally {
+			JdbcUtls.close(conn, st, rs);
 		}
 		return (AdminUser) objects.get(0);
 	}

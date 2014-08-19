@@ -1,13 +1,13 @@
 package westion.www.admin.action;
 
 import java.util.List;
-
 import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
 import westion.www.entity.Notice;
+import westion.www.exception.QueryException;
 import westion.www.service.NoticeService;
 import westion.www.service.impl.NoticeServiceImpl;
 import westion.www.utls.FileTool;
@@ -79,6 +79,23 @@ public class AdminNoticeAction {
 										+ filename));
 			errorList.add(properties.getProperty("uploadError"));
 		}
+	}
+
+	/**
+	 * 获取所有通知信息
+	 * 
+	 * @return events List\<Notice\>
+	 */
+	public List<Notice> list() {
+		List<Notice> notices = null;
+		try {
+			notices = noticeService.list();
+		} catch (QueryException e) {
+			errorList.add(properties.getProperty("sqlError"));
+		} catch (Exception e) {
+			errorList.add(properties.getProperty("unknownError"));
+		}
+		return notices;
 	}
 
 	/**

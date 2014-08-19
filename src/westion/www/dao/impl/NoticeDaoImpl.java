@@ -3,9 +3,11 @@ package westion.www.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import westion.www.dao.NoticeDao;
+import westion.www.entity.Event;
 import westion.www.entity.Notice;
 import westion.www.exception.AddException;
 import westion.www.exception.DeleteException;
@@ -51,9 +53,48 @@ public class NoticeDaoImpl implements NoticeDao {
 			e.printStackTrace();
 			throw new QueryException(e);
 		}
+		finally {
+			JdbcUtls.close(conn, st, rs);
+		}
 		return (Notice) objects.get(0);
 	}
 
+	
+	/**
+	 * 返回Notice的列表
+	 * 
+	 * @return List\<Notice\> Notice的列表
+	 * @throws QueryException
+	 *             不能得到实体
+	 * */
+	@Override
+	public List<Notice> list() {
+
+		List<Notice> notices = null;
+		try {
+			conn = JdbcUtls.getConnection();
+			st = conn.prepareStatement("select * from notice");
+			rs = st.executeQuery();
+
+			objects = JdbcUtls.GetObjects(rs, Notice.class);
+
+			notices = new ArrayList<Notice>();
+
+			for (int i = 0; i < objects.size(); i++) {
+				notices.add((Notice) objects.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new QueryException(e);
+		} finally {
+			JdbcUtls.close(conn, st, rs);
+		}
+		return notices;
+	}
+
+	
+	
+	
 	/**
 	 * 增加一条通知
 	 * 
@@ -122,7 +163,7 @@ public class NoticeDaoImpl implements NoticeDao {
 	 * 修改一条通知
 	 * 
 	 * @param ncontent
-	 *            String 通知内容
+	 *            String 通知内容		
 	 * @param destination_url
 	 *            String 通知的链接
 	 * @param nphoto_url

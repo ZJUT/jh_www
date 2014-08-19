@@ -1,5 +1,7 @@
 package westion.www.dao;
 
+import java.util.List;
+
 import westion.www.entity.Notice;
 
 /**
@@ -27,4 +29,7 @@ public interface NoticeDao {
 
 	void update(Integer id, String ncontent, String destination_url,
 			String nphoto_url, Long create_time);
+
+
+	List<Notice> list();
 }

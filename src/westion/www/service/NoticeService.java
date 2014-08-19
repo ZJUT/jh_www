@@ -1,5 +1,7 @@
 package westion.www.service;
 
+import java.util.List;
+
 import westion.www.entity.Notice;
 
 
@@ -16,7 +18,8 @@ public interface NoticeService {
 	Notice getNew();
 
 	void delete(Integer id);
-
+	
+	List<Notice> list();
 
 	void add(String ncontent, String destination_url, String nphoto_url,
 			Long create_time);

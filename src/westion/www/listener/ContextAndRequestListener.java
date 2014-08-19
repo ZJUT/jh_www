@@ -67,11 +67,11 @@ public class ContextAndRequestListener implements ServletContextListener,
 		params = request.getParameterMap();
 		request.setAttribute("params", params);
 		
-		for (Entry<String, String[]> para : params.entrySet()) {
+		/*for (Entry<String, String[]> para : params.entrySet()) {
 
 			System.out.println(para.getKey() + " = " + para.getValue()[0]);
 
-		}
+		}*/
 	}
 
 	/**
