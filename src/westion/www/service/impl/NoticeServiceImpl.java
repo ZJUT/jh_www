@@ -50,6 +50,17 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	/**
+	 * 获取所有通知信息
+	 * 
+	 * @return events List\<Notice\>
+	 */
+	public List<Notice> list() {
+
+		return formatTime(noticeDao.list());
+
+	}
+
+	/**
 	 * 删除一条通知
 	 * 
 	 * @param id
@@ -58,7 +69,6 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void delete(Integer id) {
 		noticeDao.delete(id);
-
 	}
 
 	/**
