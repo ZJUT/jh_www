@@ -1,0 +1,241 @@
+/*
+Author:HJK;
+Site: www.HJK.im;
+*/
+
+body, textarea, input, option {
+	font: 16px \5FAE\8F6F\96C5\9ED1,\534E\6587\7EC6\9ED1,arial,sans-serif;
+	color: #031A1F;
+	text-shadow: rgba(0,0,0,.2) 0 1px 0;
+}
+h1, h2, h3, h4 {
+	font-weight: 300;
+}
+a, .btn, .fm-ctrl span, #fm-box .fm-info, #fm-box img, #fm-box, .header cite, #bg span, #bg b, li, .memberList li div {
+	-webkit-transition: .3s ease;
+	-moz-transition: .3s ease;
+	-o-transition: .3s ease;
+	transition: .3s ease;
+}
+a {
+	color: #A26700;
+	text-decoration: none;
+}
+ol, ul {
+	list-style: none;
+}
+
+.logo{
+	color: #F2F2F2;
+	text-indent: -999em;
+	margin: 0 auto;
+	width: 100%;
+	height: 600px;
+	background-color: #42bfed;
+	background: url(../img/Joy.jpg) no-repeat 50% 50%;
+	overflow: hidden;
+	-webkit-transition: 2s ease;
+	-moz-transition: 1s ease;
+	-o-transition: 1s ease;
+	transition: 1s ease;
+}
+.header a{
+	font-size: 14px;
+	font-style: normal;
+	color: #666;
+	text-shadow: rgba(0,0,0,.2) 0 1px 0;
+	padding: 5px 20px;
+}
+.header a:hover{
+	color: #E40000;
+}
+.nav {
+	height: 80px;
+	margin: 0 auto;
+	position: relative;
+	border-right: 1px solid #ebebeb;
+	width: 0;
+}
+.nav li{
+	list-style: none;
+	float: left;
+	width: 109px;
+	height: 20px;
+	padding: 30px 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-left: 1px solid #ebebeb;
+}
+.nav a{
+	font-size:20px;
+}
+.navTag{
+	width: 130px;
+	height: 5px;
+	background: #039ae3;
+	top: 75px;
+	position: absolute;
+}
+.notice{
+	margin-top: 100px;
+}
+.notice a{
+	background: #CBDBDB;
+	background: rgba(0,0,0,.1);
+	border-radius: 13px;
+}
+.banner {
+	position: relative;
+	overflow: auto;
+	max-width: 1400px;
+	height: 600px;
+	margin: 0 auto;
+}
+.banner li {
+	list-style: none;
+	height: 600px;
+	overflow-y: hidden;
+}
+.banner img{
+	width: 100%;
+}
+.banner ul li { float: left; }
+.shadow{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+}
+.shadow h2{
+	font-size: 80px;
+	margin-top: 220px;
+}
+.shadow h2 a{
+	color: #FFF;
+	border: 3px solid #FFF;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+#intro{
+	margin-top: 60px;
+	background: #FED61D;
+}
+.slide{
+	color: #333;
+	width: 700px; height: 300px;
+	margin-top: 50px;
+	position: absolute;
+}
+#introContent{
+	left: -350px;
+	margin-left: 50%;
+	padding-top: 60px;
+	font-size: 16px;
+	line-height: 35px;
+}
+.time {
+	width: 120px;
+	position: relative;
+	float: left;
+}
+.year {
+	font-size: 11px;
+	color: #aaaaaa;
+	padding-left: 23px;
+	line-height: 11px;
+	vertical-align: text-top;
+	width: 48px;
+	display: inline-block;
+}
+.day {
+	font-size: 28px;
+	color: #585858;
+	line-height: 23px;
+	vertical-align: text-top;
+	display: inline-block;
+}
+.event li {
+	cursor: default;
+}
+.event_round {
+	width: 12px;
+	height: 12px;
+	border: solid #d0d0d0 2px;
+	border-radius: 12px;
+	background: #FFF;
+	display: inline-block;
+	float: right;
+	right: -9px;
+	position: absolute;
+}
+.eventList {
+	float: left;
+	width: 784px;
+	margin-top: -5px;
+	padding-left: 28px;
+	border-left: solid 2px #d0d0d0;
+	padding-bottom: 50px;
+}
+.title {
+	font-size: 20px;
+	color: #333;
+	display: block;
+	padding-bottom: 5px;
+}
+.content {
+	color: #737373;
+	font-size: 15px;
+}
+.share {
+	background: #EFEFEF;
+	text-align: center;
+	padding-bottom: 80px;
+}
+.icon {
+	width: 100px; height: 230px;
+	margin: 0 40px;
+	opacity: 0.6;
+	float: left;
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+}
+.icon:hover {
+	opacity: 1;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.qrcode {
+	width: 100px; height: 100px;
+}
+.copyright {
+	width: 960px; height: 30px;
+	margin: 0 auto;
+	padding-top: 50px;
+	color: #6a6a6a;
+	text-align: center;
+}
+.copyright a{
+	color: #3a3a3a;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.copyright a:hover {
+	color: #000;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+

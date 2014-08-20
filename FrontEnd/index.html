@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./css/layout.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="./js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="./js/unslider.min.js"></script>
+	<title>精弘网络</title>
+	<script>
+	$(function(){
+		var host = "../jh_www/api?";
+		var APPID = "APPID01";
+		var token = "saf32e34ewsf8f42";
+		var eModel = "Event";
+		var navModel = "Navigator";
+		var notModel = "Notice"
+		var lAction = "list";
+		var nAction = "getNew";
+
+		//获取全部导航
+		$.ajax({
+			url: host + "APPID=" + APPID + "&token=" + token + "&model=" + navModel + "&action=" + lAction,
+			type: "GET",
+			dataType: "json",
+			timeout: 1000,
+			cache: false,
+			error: navErrorFunc,
+			success: navListFunc
+		});
+		function navErrorFunc(){
+			$("#navList").html(
+				"<li class='navListItem'><a href='http://bbs.zjut.edu.cn/'  target='_blank'>论坛</a></li>" +
+				"<li class='navListItem'><a href='http://feel.zjut.com/'  target='_blank'>电台</a></li>" +
+				"<li class='navListItem'><a href='http://doc.zjut.com/'  target='_blank'>文库</a></li>" +
+				"<li class='navListItem'><a href='http://go.zjut.com/'  target='_blank'>导航</a></li>" +
+				"<li class='navListItem'><a href='http://pt.zjut.com/'  target='_blank'>PT站</a></li>");
+			navMouseOver();
+			navBarWidth();
+		}
+		function navListFunc(data){
+			$.each(data.data, function(i, item) {  
+				$("#navList").append("<li class='navListItem'><a href='" + item.destination_url + "' target='_blank'>" + item.naname + "</a></li>");
+			});
+			navMouseOver();
+			navBarWidth();
+		}
+
+		//获取新的通知
+		$.ajax({
+			url: host + "APPID=" + APPID + "&token=" + token + "&model=" + notModel + "&action=" + nAction,
+			type: "GET",
+			dataType: "json",
+			timeout: 1000,
+			cache: false,
+			success: notListFunc
+		});
+		function notListFunc(data){
+			// $.each(data.data, function(i, item) {  
+				$("#notice").html("<h2><a href='" + data.data.destination_url + "' target='_blank'>" + data.data.ncontent + "</a></h2>");  
+			// }); 
+		}
+
+		//获取全部事件
+		$.ajax({
+			url: host + "APPID=" + APPID + "&token=" + token + "&model=" + eModel + "&action=" + lAction,
+			type: "GET",
+			dataType: "json",
+			timeout: 1000,
+			cache: false,
+			error: eventErrorFunc,
+			success: eventListFunc
+		});
+		function eventErrorFunc(){
+			$("#event").append(
+				"<li><div class='time'>" + 
+				"<span class='year'>" + "2013" + "/" + "12" + "</span>" + 
+				"<span class='day'>" + "24" + "</span>" +
+				"<span class='event_round'></span>" +
+				"</div><div class='eventList'>" +
+				"<a href='#' class='title'>" + "哎呀~服务器出了一个问题" + "</a>" +
+				"<div class='content'>" + "一大波技术人员正在路上……(´・ω・`)" + "</div>" +
+				"</div></li>"
+			);
+		}
+		function eventListFunc (data) {
+			var aEventTime;
+			var aEventDay;
+			$.each(data.data, function(i, item) {
+				aEventTime=item.formatTime_etime.split(" ");
+				aEventDay=aEventTime[0].split("-");
+				// alert(aEventDay[2]);
+				$("#event").append(
+					"<li id='test'><div class='time'>" + 
+					"<span class='year'>" + aEventDay[0] + "/" + aEventDay[1] + "</span>" + 
+					"<span class='day'>" + aEventDay[2] + "</span>" +
+					"<span class='event_round'></span>" +
+					"</div><div class='eventList'>" +
+					"<a href='#' class='title'>" + item.etitle + "</a>" +
+					"<div class='content'>" + item.econtent + "</div>" +
+					"</div></li>"
+				);
+			});
+		}
+		$('.banner').unslider();
+	});
+
+	//页面特效
+	//导航鼠标移入
+	function navMouseOver(){
+		$(".navListItem").hover(function(){
+			$("#navTag").stop();
+			$("#navTag").animate({left:$(this).position().left},"high");
+		});
+	}
+	//导航宽度适应
+	function navBarWidth(){
+		$("#nav").animate({width:$(".navListItem").length*130+1+'px'});
+	}
+	</script>
+</head>
+<body>
+	<div class="box" id="header">
+		<div class="header">
+			<h1 class="logo" style="-webkit-animation: metro_grey 21s linear infinite;"></h1>
+			<div id="nav" class="nav">
+				<ul id="navList">
+				</ul>
+				<div id="navTag" class="navTag"></div>
+			</div>
+		</div>
+	</div>
+	<div class="box banner" id="slidebox">
+    <ul>
+        <li><img src="./banner/slide1.jpg" alt=""></li>
+        <li><img src="./banner/slide2.jpg" alt=""></li>
+        <li><img src="./banner/slide3.jpg" alt=""></li>
+    </ul>
+    <div class="shadow" id="notice">
+    	<h2><a href="#">精弘网络招新进行中</a></h2>
+    </div>
+	</div>
+	<div class="box" id="intro">
+		<div id="introContent" class="slide">
+			<p><span style="font-size:40px">“精弘网络</span>是浙江工业大学校级学生组织，自2002年5月成立以来，以打造大学生五彩生活为宗旨，整合校内外网络传播资源，积极营造浓厚的网络文化氛围，为浙工大师生提供校内<i>网站导航、论坛、新闻资讯、Feel电台、下载站、开源社区、学生邮箱、即时通讯、linux更新源</i>等全方位服务，发展成为工大师生喜爱的学习资源中心、情感交流中心和生活交流中心。<span style="font-size:30px">”</span></p>
+		</div>
+		
+	</div>
+	<div class="box" id="timeline">
+		<div class="inner">
+			<div class="loading" style="display:none;"></div>
+			<ul id="event" class="event">
+			</ul>
+		</div>
+	</div>
+	<div class="box" id="footer">
+		<div class="share">
+			<div class="thininner">
+				<a href="#" class="icon"><img class="qrcode" src="./img/weixin.png" alt=""></a>
+				<a href="#" class="icon"><img class="qrcode" src="./img/renren.png" alt=""></a>
+				<a href="#" class="icon"><img class="qrcode" src="./img/weibo.png" alt=""></a>
+				<a href="#" class="icon"><img class="qrcode" src="./img/github.png" alt=""></a>
+			</div>
+		</div>
+		<div class="copyright">
+			<span>Copyright © 2013 <a href="http://www.zjut.com">浙江工业大学-精弘网络</a></span>&emsp;&emsp;
+			<span>Developed by <a href="http://www.hjk.im">HJK</a> & <a href="http://westion.tk/">Westion</a> </span>
+		</div>
+	</div>
+</body>
+</html>
