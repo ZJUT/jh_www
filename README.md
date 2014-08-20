@@ -59,3 +59,7 @@
 ###备注
 github使用简约教程，参见suzie的[github多人协作][1]
 [1]:https://github.com/ZJUT/hello-github/blob/master/How-to-use-Github.md
+
+###预览
+
+![preview](preview.png)
