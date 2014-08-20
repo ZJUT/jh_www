@@ -13,12 +13,18 @@
 ###需要修改的ajax接口
 
 - index.html
-  var host = "http://127.0.0.1:8080/jh_www/api?";
+
+    `var host = "http://127.0.0.1:8080/jh_www/api?";`
+
 - login.html
-  $.post("../jh_www/admin/login?APPID=APPID01&token=saf32e34ewsf8f42"
+
+    `$.post("../jh_www/admin/login?APPID=APPID01&token=saf32e34ewsf8f42"`
+
 - admin.html
-  var host = "http://127.0.0.1:8080/jh_www/api?";
-  var adminhost = "http://127.0.0.1:8080/jh_www/admin/api?";
+
+    `var host = "http://127.0.0.1:8080/jh_www/api?";`
+
+    `var adminhost = "http://127.0.0.1:8080/jh_www/admin/api?";`
 
 ##2014-08-19更新 v0.9.1
 
